@@ -19,11 +19,6 @@
     "@angular/platform-browser": "~11.2.1",
     "@angular/platform-browser-dynamic": "~11.2.1",
     "@angular/router": "~11.2.1",
-    "angular2-ladda": "^5.0.0",
-    "bootstrap": "^4.5.3",
-    "ladda": "^2.0.3",
-    "ng-zorro-antd": "^11.4.2",
-    "ngx-bootstrap": "^7.1.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"
