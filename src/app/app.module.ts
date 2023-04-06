@@ -8,10 +8,12 @@ import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { LaddaModule } from 'angular2-ladda';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 registerLocaleData(en);
 
@@ -26,9 +28,13 @@ registerLocaleData(en);
     HttpClientModule,
     BrowserAnimationsModule,
     NzIconModule,
-    LaddaModule
+    LaddaModule,
+    NzNotificationModule
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }],
+  providers: [
+    { provide: NZ_I18N, useValue: en_US },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

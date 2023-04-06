@@ -1,1 +1,28 @@
-<p>signin works!</p>
+<div class="main-page">
+    <div class="left">
+        <img src="assets/images/auth/background-image1.jpeg" />
+    </div>
+    <div class="right form-page">
+        <h1 class="heading text-black-2">Sign In</h1>
+        <p class="sub-heading text-black-5">Login to access all our wonderful features.</p>
+        <app-error-message [message]="errorMessage"></app-error-message>
+        <form class="sub-form" [formGroup]="form" (ngSubmit)="signin()">
+            <div class="input-box full-width">
+                <label>Email Address</label>
+                <input type="email" placeholder="johndoe@example.com" autocomplete="email" formControlName="emailAddress" />
+            </div>
+            <div class="input-box full-width">
+                <label>Password</label>
+                <div class="input-container">
+                    <input type="password" autocomplete="current-password" #passwordField placeholder="********"  formControlName="password"/>
+                    <i nz-icon nzType="eye-invisible" nzTheme="outline" *ngIf="passwordField.type == 'text'"
+                        (click)="passwordField.type = 'password'"></i>
+                    <i nz-icon nzType="eye" nzTheme="outline" *ngIf="passwordField.type == 'password'"
+                        (click)="passwordField.type = 'text'"></i>
+                </div>
+            </div>
+            <p class="form-detail">Don't have an account? <a routerLink="/signup">Create one</a></p>
+            <button class="button-primary" [ladda]="processLoading">Sign in</button>
+        </form>
+    </div>
+</div>

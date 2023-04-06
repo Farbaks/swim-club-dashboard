@@ -7,6 +7,8 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ErrorMessageModule } from 'src/app/components/common/error-message/error-message.module';
 import { LaddaModule } from 'angular2-ladda';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -15,9 +17,11 @@ import { LaddaModule } from 'angular2-ladda';
   imports: [
     CommonModule,
     SignupRoutingModule,
+    RouterModule,
     FormsModule,
     ReactiveFormsModule,
     NzIconModule,
+    NzNotificationModule,
     ErrorMessageModule,
     LaddaModule.forRoot({
         style: "zoom-out",

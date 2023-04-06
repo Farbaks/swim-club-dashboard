@@ -11,7 +11,7 @@
     }
 }
 
-.input-group {
+.input-box {
     display: flex;
     flex-flow: column;
 }
@@ -97,4 +97,16 @@ textarea {
     border: 1px solid #df1b41;
     border-radius: 4px;
     box-shadow: none;
+}
+.form-detail {
+    font-size: 14px;
+    font-weight: 450;
+    margin: 10px 0 15px;
+    a {
+        color: steelblue;
+        cursor: pointer;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
 }

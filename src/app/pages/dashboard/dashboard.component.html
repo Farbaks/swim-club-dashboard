@@ -1,1 +1,36 @@
-<p>dashboard works!</p>
+<div class="main-page">
+    <div class="sidebar d-flex flex-column align-item-start">
+        <a routerLink="/dashboard/" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}"
+            #dashboardLink="routerLinkActive">
+            <span nz-icon nzType="appstore" nzTheme="outline"></span>
+            Dashboard
+        </a>
+        <a routerLink="/dashboard/users" routerLinkActive="active-link" #userLink="routerLinkActive">
+            <span nz-icon nzType="user" nzTheme="outline"></span>
+            Users
+        </a>
+        <a routerLink="/dashboard/squads" routerLinkActive="active-link" #squadLink="routerLinkActive">
+            <span nz-icon nzType="team" nzTheme="outline"></span>
+            Squads
+        </a>
+        <a routerLink="/dashboard/trainings" routerLinkActive="active-link" #trainingLink="routerLinkActive">
+            <span nz-icon nzType="bars" nzTheme="outline"></span>
+            Trainings
+        </a>
+        <a routerLink="/dashboard/events" routerLinkActive="active-link" #eventLink="routerLinkActive">
+            <span nz-icon nzType="notification" nzTheme="outline"></span>
+            Events
+        </a>
+        <a routerLink="/dashboard/settings" routerLinkActive="active-link" #settingsLink="routerLinkActive">
+            <span nz-icon nzType="setting" nzTheme="outline"></span>
+            Settings
+        </a>
+        <a>
+            <span nz-icon nzType="logout" nzTheme="outline"></span>
+            Logout
+        </a>
+    </div>
+    <div class="content">
+        <router-outlet></router-outlet>
+    </div>
+</div>
