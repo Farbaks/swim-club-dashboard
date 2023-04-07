@@ -1,1 +1,78 @@
-<p>users works!</p>
+<div class="side-page">
+    <div class="top d-flex align-items-center justify-content-between">
+        <div class="left">
+            <h1 class="text-black-1">Users</h1>
+            <p class="text-black-5">View all dashboard users, including admins, coaches, swimmers and parents.</p>
+        </div>
+        <div class="right">
+            <button class="button-primary">+ Add</button>
+        </div>
+    </div>
+
+    <div class="filter-tags d-flex">
+        <span [class.active-tab]="role == ''" (click)="selectTab('')">All users</span>
+        <span [class.active-tab]="role == 'admin'" (click)="selectTab('admin')">Admins</span>
+        <span [class.active-tab]="role == 'coach'" (click)="selectTab('coach')">Coaches</span>
+        <span [class.active-tab]="role == 'swimmer'" (click)="selectTab('swimmer')">Swimmers</span>
+        <span [class.active-tab]="role == 'parent'" (click)="selectTab('parent')">Parents</span>
+    </div>
+
+    <div class="filter-box d-flex justify-content-start">
+        <div class="input-container">
+            <span class="before" nz-icon nzType="search" nzTheme="outline"></span>
+            <input type="search" placeholder="Search for name..." [(ngModel)]="query" (ngModelChange)="getUsers()" />
+        </div>
+    </div>
+
+    <div class="table-wrapper">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Phone Number</th>
+                    <th>Gender</th>
+                    <th>Role</th>
+                    <th>Date Created</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users | paginate: { itemsPerPage: limit, currentPage: page, totalItems: totalCount }">
+                    <td>
+                        <div class="initials">
+                            <ngx-avatars size="50" [name]="user.firstName+' '+user.lastName"></ngx-avatars>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="details">
+                            <p class="heading">{{user.firstName}} {{user.lastName}}</p>
+                            <p class="text">{{user.emailAddress}}</p>
+                        </div>
+                    </td>
+                    <td>
+                        <p class="text">{{user.phoneNumber}}</p>
+                    </td>
+                    <td>
+                        <p class="text">{{user.gender | titlecase}}</p>
+                    </td>
+                    <td>
+                        <p class="tag">{{user.role | titlecase}}</p>
+                    </td>
+                    <td>
+                        <p class="text">{{user.created_at | date:'short'}}</p>
+                    </td>
+                    <td>
+                        <p class="action">View</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="pagination d-flex justify-content-center">
+            <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+        </div>
+       
+    </div>
+
+
+</div>

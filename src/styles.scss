@@ -41,3 +41,12 @@ body {
 .half-width {
     width: 48%;
 }
+
+.ngx-pagination {
+    color: var(--black-3) !important;
+    .current {
+        background: var(--black-9) !important;
+        color: var(--black-4) !important;
+        border-radius: 3px !important;
+    }
+}

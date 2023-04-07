@@ -22,4 +22,8 @@ export class UserService {
     refreshToken() {
         return this.apiService.get('users/me');
     }
+
+    getUsers(page:number, limit:number, role:string, query:string) {
+        return this.apiService.get(`users?page=${page}&limit=${limit}&role=${role}&query=${query}`);
+    }
 }

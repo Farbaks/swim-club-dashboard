@@ -52,6 +52,7 @@ textarea {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background: white;
     &:focus-within {
         border: 1px solid #d5dbe1;
         box-shadow: 0px 0px 0px 3px rgba(58, 151, 212, 0.36);
@@ -68,6 +69,10 @@ textarea {
         color: var(--black-5);
         cursor: pointer;
         margin-right: 10px;
+        flex-shrink: 0;
+    }
+    .before {
+        margin-left: 10px;
     }
 }
 .input-large {
