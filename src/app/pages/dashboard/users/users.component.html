@@ -5,7 +5,7 @@
             <p class="text-black-5">View all dashboard users, including admins, coaches, swimmers and parents.</p>
         </div>
         <div class="right">
-            <button class="button-primary" (click)="toggleUserModal('new');">+ Add</button>
+            <button class="button-primary" (click)="toggleUserModal('new');">+ Add User</button>
         </div>
     </div>
 
@@ -18,9 +18,12 @@
     </div>
 
     <div class="filter-box d-flex justify-content-start">
-        <div class="input-container">
-            <span class="before" nz-icon nzType="search" nzTheme="outline"></span>
-            <input type="search" placeholder="Search for name..." [(ngModel)]="query" (ngModelChange)="getUsers()" />
+        <div class="input-box full-width">
+            <label>Search for users</label>
+            <div class="input-container">
+                <span class="before" nz-icon nzType="search" nzTheme="outline"></span>
+                <input type="search" placeholder="Search" [(ngModel)]="query" (ngModelChange)="getUsers()" />
+            </div>
         </div>
     </div>
 
@@ -60,7 +63,7 @@
                         <p class="tag">{{user.role | titlecase}}</p>
                     </td>
                     <td>
-                        <p class="text">{{user.created_at | date:'short'}}</p>
+                        <p class="text">{{user.created_at | date:'mediumDate'}}</p>
                     </td>
                     <td>
                         <p class="action" (click)="toggleUserModal('edit', user);">View</p>

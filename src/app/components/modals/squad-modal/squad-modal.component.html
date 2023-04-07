@@ -1,0 +1,39 @@
+<nz-modal [(nzVisible)]="visible" [nzTitle]="title" (nzOnCancel)="handleCancel()"
+    [nzFooter]="nzModalFooter">
+    <div *nzModalContent>
+        <app-error-message [message]="errorMessage"></app-error-message>
+        <form class="sub-form" [formGroup]="form" (ngSubmit)="submit()">
+            <div class="input-box full-width">
+                <label>Squad Name</label>
+                <input type="text" placeholder="Senior Squad" formControlName="name"
+                    [class.error-input]="form['controls']['name'].errors && form['controls']['name'].touched" />
+            </div>
+            <div class="input-box full-width">
+                <label>Rank (Optional)</label>
+                <input type="text" formControlName="rank" />
+            </div>
+            <div class="input-box full-width">
+                <label>Coach</label>
+                <div class="select-container full-width">
+                    <select class="full-width" formControlName="coachId"
+                        [class.error-input]="form['controls']['coachId'].errors && form['controls']['coachId'].touched">
+                        <option value="" disabled>Select a coach</option>
+                        <option [ngValue]="coach.id" *ngFor="let coach of coaches">{{coach.firstName}} {{coach.lastName}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="input-box full-width">
+                <label>Description</label>
+                <textarea formControlName="description"
+                    [class.error-input]="form['controls']['description'].errors && form['controls']['description'].touched"></textarea>
+            </div>
+        </form>
+    </div>
+</nz-modal>
+
+<ng-template #nzModalFooter>
+    <div class="d-flex justify-content-end">
+        <button class="button-cancel" (click)="handleCancel()">Cancel</button>
+        <button class="button-primary" (click)="submit()" [ladda]="processLoading">{{buttonText}}</button>
+    </div>
+</ng-template>

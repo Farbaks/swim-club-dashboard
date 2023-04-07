@@ -11,11 +11,12 @@
         .logo {
             padding: 0 20px;
             margin-bottom: 50px;
-            font-size: 30px;
+            font-size: 27px;
             font-weight: 200;
             color: var(--black-1);
             user-select: none;
             span {
+                font-size: 30px;
                 font-weight: 500;
                 margin-left: 5px;
                 padding-left: 5px;
@@ -32,6 +33,10 @@
             font-weight: 350;
             margin-bottom: 10px;
             cursor: pointer;
+            * {
+                transition: none !important;
+            }
+            
             &:hover {
                 background: white;
             }

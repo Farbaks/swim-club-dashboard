@@ -1,0 +1,25 @@
+<nz-modal [(nzVisible)]="visible" [nzTitle]="'Add swimmer to squad'" (nzOnCancel)="handleCancel()"
+    [nzFooter]="nzModalFooter">
+    <div *nzModalContent>
+        <app-error-message [message]="errorMessage"></app-error-message>
+        <form class="sub-form" [formGroup]="form" (ngSubmit)="submit()">
+            <div class="input-box full-width">
+                <label>Select Swimmer</label>
+                <div class="select-container full-width">
+                    <select class="full-width" formControlName="swimmer"
+                        [class.error-input]="form['controls']['swimmer'].errors && form['controls']['swimmer'].touched">
+                        <option value="" disabled>Select a swimmer</option>
+                        <option [ngValue]="swimmer.id" *ngFor="let swimmer of swimmers">{{swimmer.firstName}} {{swimmer.lastName}}</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+</nz-modal>
+
+<ng-template #nzModalFooter>
+    <div class="d-flex justify-content-end">
+        <button class="button-cancel" (click)="handleCancel()">Cancel</button>
+        <button class="button-primary" (click)="submit()" [ladda]="processLoading">Add swimmer</button>
+    </div>
+</ng-template>

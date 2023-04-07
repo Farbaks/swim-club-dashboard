@@ -1,1 +1,119 @@
-<p>squads works!</p>
+<div class="side-page">
+    <div class="top d-flex align-items-center justify-content-between">
+        <div class="left">
+            <h1 class="text-black-1">Squads</h1>
+            <p class="text-black-5">View all squads and their members.</p>
+        </div>
+        <div class="right">
+            <button class="button-primary" (click)="toggleSquadModal('new');">+ Add Squad</button>
+        </div>
+    </div>
+
+    <div class="filter-box d-flex justify-content-start">
+        <div class="input-box full-width">
+            <label>Search for squads</label>
+            <div class="input-container">
+                <span class="before" nz-icon nzType="search" nzTheme="outline"></span>
+                <input type="search" placeholder="Search" [(ngModel)]="query" (ngModelChange)="refresh('new')" />
+            </div>
+        </div>
+    </div>
+
+    <div class="body d-flex align-items-start justify-content-between">
+        <div class="left" [class.open-details]="showSquadDetails">
+            <div class="card-list d-flex flex-row flex-wrap">
+                <div class="card-item" [class.selected-item]="squad.id == selectedSquad?.id" *ngFor="let squad of squads" (click)="toggleSquadDetails(squad)">
+                    <div class="initials">
+                        <ngx-avatars size="50" [name]="squad.name.split(' ').splice(0,2).join(' ')" [round]="false"
+                            cornerRadius="5"></ngx-avatars>
+                    </div>
+                    <h2>{{squad.name}}</h2>
+                    <p class="text">Coach: <b>{{squad.coach.firstName}} {{squad.coach.firstName}}</b></p>
+                    <p class="text">{{squad.membersCount}} Swimmer(s)</p>
+                </div>
+            </div>
+            <div class="pagination d-flex justify-content-center" *ngIf="squads.length > 0">
+                <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+            </div>
+        </div>
+
+        <!-- Card Details -->
+        <div class="card-details" *ngIf="selectedSquad" [class.open-details]="showSquadDetails">
+            <div class="right">
+                <button class="button-primary-2" (click)="toggleSquadModal('edit')">
+                    <span nz-icon nzType="edit" nzTheme="outline"></span>
+                    Edit Squad Details
+                </button>
+            </div>
+            <div class="initials">
+                <ngx-avatars size="50" [name]="selectedSquad.name.split(' ').splice(0,2).join(' ')" [round]="false"
+                    cornerRadius="5"></ngx-avatars>
+            </div>
+            <h2 class="col-12 col-lg-8">{{selectedSquad.name}}</h2>
+            <p class="text">Rank: <b>{{selectedSquad.rank || 'N/A'}}</b></p>
+            <p class="text">Coach: <b>{{selectedSquad.coach.firstName}} {{selectedSquad.coach.firstName}}</b></p>
+            <p class="text">{{selectedSquad.membersCount}} Swimmer(s)</p>
+            <p class="text">
+                Description:
+                <br>
+                {{selectedSquad.description}}
+            </p>
+            <div class="filter d-flex align-items-center justify-content-between">
+                <div class="input-container">
+                    <span class="before" nz-icon nzType="search" nzTheme="outline"></span>
+                    <input type="search" placeholder="Search" [(ngModel)]="squadMembersQuery"
+                        (ngModelChange)="getSquadMembers()" />
+                </div>
+                <button class="button-primary-2" (click)="showSquadMemberModal = true;">+ Add Member</button>
+            </div>
+
+            <div class="table-wrapper">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>NAME</th>
+                            <th>GENDER</th>
+                            <th>DATE OF BIRTH</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            *ngFor="let user of squadMembers | paginate: { itemsPerPage: memberLimit, currentPage: memberPage, totalItems: memberTotalCount }">
+                            <td>
+                                <div>
+                                    <ngx-avatars size="35" [name]="user.firstName+' '+user.lastName"></ngx-avatars>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="details">
+                                    <p class="heading">{{user.firstName}} {{user.lastName}}</p>
+                                    <p class="text">{{user.emailAddress}}</p>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="text">{{user.gender | titlecase}}</p>
+                            </td>
+                            <td>
+                                <p class="text">{{user.dateOfBirth | date:'mediumDate'}}</p>
+                            </td>
+                            <td>
+                                <p class="action red" (click)="removeMember(user.id);">Delete</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="pagination d-flex justify-content-center" *ngIf="squadMembers.length > 0">
+                    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-squad-modal [(visible)]="showSquadModal" [action]="squadAction" [coaches]="coaches" [squad]="selectedSquad"
+    (actionSuccessful)="refresh(squadAction)"></app-squad-modal>
+
+<app-squad-member-modal [(visible)]="showSquadMemberModal" [swimmers]="swimmers" [squad]="selectedSquad"
+(actionSuccessful)="getSquads();getSquadMembers()"></app-squad-member-modal>
