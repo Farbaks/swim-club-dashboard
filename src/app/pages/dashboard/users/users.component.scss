@@ -66,11 +66,12 @@
             min-width: 100%;
             thead {
                 th {
-                    font-size: 12px;
+                    font-size: 11px;
                     font-weight: 450;
                     color: var(--black-5);
                     padding: 12px;
                     border-bottom: solid 1px rgb(240, 240, 240);
+                    background: var(--grey-1);
                 }
             }
             tbody {
@@ -98,9 +99,9 @@
                     font-size: 11px;
                     font-weight: 500;
                     padding: 2px 6px;
-                    border-radius: 8px;
-                    background: var(--grey-1);
-                    color: var(--grey-4);
+                    border-radius: 10px;
+                    background: var(--purple-2);
+                    color: var(--purple-1);
                 }
                 .action {
                     font-size: 12px;

@@ -13,6 +13,9 @@ export class UsersComponent {
     limit: number = 20;
     totalCount: number = 0;
     users: Array<any> = [];
+    showUserModal: boolean = false;
+    userAction: 'new' | 'edit' = 'new';
+    selectedUser:any;
     constructor(private userService: UserService) {
         this.getUsers();
     }
@@ -34,5 +37,11 @@ export class UsersComponent {
                 this.totalCount = res.pagination.count;
             }
         })
+    }
+
+    toggleUserModal(action: 'new' | 'edit', user?:any) {
+        this.selectedUser = user;
+        this.userAction = action;
+        this.showUserModal = true;
     }
 }

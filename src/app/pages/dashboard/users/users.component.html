@@ -5,7 +5,7 @@
             <p class="text-black-5">View all dashboard users, including admins, coaches, swimmers and parents.</p>
         </div>
         <div class="right">
-            <button class="button-primary">+ Add</button>
+            <button class="button-primary" (click)="toggleUserModal('new');">+ Add</button>
         </div>
     </div>
 
@@ -29,11 +29,11 @@
             <thead>
                 <tr>
                     <th></th>
-                    <th>Name</th>
-                    <th>Phone Number</th>
-                    <th>Gender</th>
-                    <th>Role</th>
-                    <th>Date Created</th>
+                    <th>NAME</th>
+                    <th>PHONE</th>
+                    <th>GENDER</th>
+                    <th>ROLE</th>
+                    <th>DATE CREATED</th>
                     <th></th>
                 </tr>
             </thead>
@@ -63,16 +63,15 @@
                         <p class="text">{{user.created_at | date:'short'}}</p>
                     </td>
                     <td>
-                        <p class="action">View</p>
+                        <p class="action" (click)="toggleUserModal('edit', user);">View</p>
                     </td>
                 </tr>
             </tbody>
         </table>
-        <div class="pagination d-flex justify-content-center">
+        <div class="pagination d-flex justify-content-center" *ngIf="users.length > 0">
             <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
-        </div>
-       
+        </div>   
     </div>
-
-
 </div>
+
+<app-users-modal [(visible)]="showUserModal" [action]="userAction" [user]="selectedUser" (actionSuccessful)="getUsers()"></app-users-modal>

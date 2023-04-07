@@ -7,6 +7,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { AvatarModule } from 'ngx-avatars';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { FormsModule } from '@angular/forms';
+import { UsersModalModule } from 'src/app/components/modals/users-modal/users-modal.module';
 
 @NgModule({
     declarations: [
@@ -18,7 +19,8 @@ import { FormsModule } from '@angular/forms';
         FormsModule,
         NzIconModule,
         AvatarModule,
-        NgxPaginationModule
+        NgxPaginationModule,
+        UsersModalModule
     ]
 })
 export class UsersModule { }

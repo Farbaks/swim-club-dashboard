@@ -1,42 +1,42 @@
-<div class="main-page">
-    <div class="left">
-        <img src="assets/images/auth/background-image1.jpeg" />
-    </div>
-    <div class="right form-page">
-        <h1 class="heading text-black-2">Register</h1>
-        <p class="sub-heading text-black-5">Create a new account to gain access to all our club has to offer</p>
+<nz-modal [(nzVisible)]="visible" [nzTitle]="title" (nzOnCancel)="handleCancel()"
+    [nzFooter]="action == 'edit' ? null : nzModalFooter">
+    <div *nzModalContent>
         <app-error-message [message]="errorMessage"></app-error-message>
-        <form class="sub-form" [formGroup]="form" (ngSubmit)="signUp()">
+        <form class="sub-form" [formGroup]="form" (ngSubmit)="submit()">
             <div class="input-box half-width">
                 <label>First Name</label>
                 <input type="text" placeholder="John" autocomplete="given-name" formControlName="firstName"
+                    [class.disabled-input]="action == 'edit'"
                     [class.error-input]="form['controls']['firstName'].errors && form['controls']['firstName'].touched" />
             </div>
             <div class="input-box half-width">
                 <label>Last Name</label>
                 <input type="text" placeholder="Doe" autocomplete="family-name" formControlName="lastName"
+                    [class.disabled-input]="action == 'edit'"
                     [class.error-input]="form['controls']['lastName'].errors && form['controls']['lastName'].touched" />
             </div>
             <div class="input-box half-width">
                 <label>Phone Number</label>
                 <input type="text" placeholder="+447549404731" autocomplete="tel" formControlName="phoneNumber"
+                    [class.disabled-input]="action == 'edit'"
                     [class.error-input]="form['controls']['phoneNumber'].errors && form['controls']['phoneNumber'].touched" />
             </div>
             <div class="input-box half-width">
                 <label>Email Address</label>
                 <input type="email" placeholder="johndoe@example.com" autocomplete="email"
-                    formControlName="emailAddress"
+                    formControlName="emailAddress" [class.disabled-input]="action == 'edit'"
                     [class.error-input]="form['controls']['emailAddress'].errors && form['controls']['emailAddress'].touched" />
             </div>
             <div class="input-box half-width">
                 <label>Date of Birth</label>
                 <input type="date" placeholder="johndoe@example.com" autocomplete="bday" formControlName="dateOfBirth"
+                    [class.disabled-input]="action == 'edit'"
                     [class.error-input]="form['controls']['dateOfBirth'].errors && form['controls']['dateOfBirth'].touched" />
             </div>
             <div class="input-box half-width">
                 <label>Gender</label>
                 <div class="select-container full-width">
-                    <select class="full-width" formControlName="gender"
+                    <select class="full-width" formControlName="gender" [class.disabled-input]="action == 'edit'"
                         [class.error-input]="form['controls']['gender'].errors && form['controls']['gender'].touched">
                         <option value="" disabled>Select a gender</option>
                         <option value="male">Male</option>
@@ -45,18 +45,22 @@
                     </select>
                 </div>
             </div>
-            <div class="input-box half-width">
+            <div class="input-box" [ngClass]="action == 'edit' ? 'full-width' : 'half-width'">
                 <label>Role</label>
                 <div class="select-container full-width">
-                    <select class="full-width" formControlName="role"
+                    <select class="full-width" formControlName="role" [class.disabled-input]="action == 'edit'"
                         [class.error-input]="form['controls']['role'].errors && form['controls']['role'].touched">
                         <option value="" disabled>Select a role</option>
-                        <option value="parent">Parent</option>
-                        <option value="swimmer">Swimmer</option>
+                        <option [ngValue]="'admin'">Admin</option>
+                        <option [ngValue]="'coach'">Coach</option>
+                        <ng-container *ngIf="action == 'edit'">
+                            <option [ngValue]="'swimmer'">Swimmer</option>
+                            <option [ngValue]="'parent'">Parent</option>
+                        </ng-container>
                     </select>
                 </div>
             </div>
-            <div class="input-box half-width">
+            <div class="input-box half-width" *ngIf="action == 'new'">
                 <label>Password</label>
                 <div class="input-container"
                     [class.error-input]="form['controls']['password'].errors && form['controls']['password'].touched">
@@ -68,23 +72,25 @@
                         (click)="passwordField.type = 'text'"></i>
                 </div>
             </div>
-            <div class="input-box full-width" *ngIf="form.value.role == 'swimmer' && age < 18">
-                <label>Parent Email</label>
-                <input type="email" placeholder="johndoe@example.com" autocomplete="email"
-                    formControlName="parentEmail" />
-            </div>
             <div class="input-box full-width">
                 <label>Address</label>
                 <input type="text" placeholder="Stafforshire Uni" autocomplete="address-line1" formControlName="address"
+                    [class.disabled-input]="action == 'edit'"
                     [class.error-input]="form['controls']['address'].errors && form['controls']['address'].touched" />
             </div>
             <div class="input-box full-width">
                 <label>Post Code</label>
                 <input type="text" placeholder="STQ7FA" autocomplete="postal-code" formControlName="postcode"
+                    [class.disabled-input]="action == 'edit'"
                     [class.error-input]="form['controls']['postcode'].errors && form['controls']['postcode'].touched" />
             </div>
-            <p class="form-detail">Already have an account? <a routerLink="/signin">Sign in</a></p>
-            <button class="button-primary" [ladda]="processLoading">Create Account</button>
         </form>
     </div>
-</div>
+</nz-modal>
+
+<ng-template #nzModalFooter>
+    <div class="d-flex justify-content-end">
+        <button class="button-cancel" (click)="handleCancel()">Cancel</button>
+        <button class="button-primary" (click)="submit()" [ladda]="processLoading">Create user</button>
+    </div>
+</ng-template>

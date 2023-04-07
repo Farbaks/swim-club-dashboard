@@ -45,17 +45,3 @@
         }
     }
 }
-
-.input-box {
-    display: flex;
-    flex-flow: column;
-    align-items: flex-start;
-    flex-shrink: 0;
-    margin-bottom: 20px;
-    label {
-        font-size: 13px;
-        font-weight: 400;
-        margin-bottom: 5px;
-        color: var(--black-5);
-    }
-}
