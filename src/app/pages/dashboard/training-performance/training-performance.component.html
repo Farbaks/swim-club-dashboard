@@ -1,0 +1,118 @@
+<div class="side-page">
+    <div class="top d-flex align-items-center justify-content-between">
+        <div class="left">
+            <h1 class="text-black-1">Training Performances</h1>
+            <p class="text-black-5">View all squad trainings performances.</p>
+        </div>
+        <div class="right">
+            <button class="button-primary" (click)="toggleTrainingPerformanceModal('new');">+ Add Performance data</button>
+        </div>
+    </div>
+
+    <div class="filter-box d-flex justify-content-start">
+        <div class="input-box search-box">
+            <label>Search for performances</label>
+            <div class="input-container">
+                <span class="before" nz-icon nzType="search" nzTheme="outline"></span>
+                <input type="search" placeholder="Search for name, description" [(ngModel)]="query"
+                    (ngModelChange)="getTrainingPerformances()" />
+            </div>
+        </div>
+        <div class="input-box">
+            <label>Trainings</label>
+            <div class="select-container full-width">
+                <select class="full-width" [(ngModel)]="selectedTraining" (ngModelChange)="getTrainingPerformances()">
+                    <option ngValue="">All trainings</option>
+                    <option [ngValue]="training.name" *ngFor="let training of trainings">{{training.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="input-box">
+            <label>Squads</label>
+            <div class="select-container full-width">
+                <select class="full-width" [(ngModel)]="selectedSquad" (ngModelChange)="getTrainingPerformances()">
+                    <option ngValue="">All squads</option>
+                    <option [ngValue]="squad.name" *ngFor="let squad of squads">{{squad.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="input-box">
+            <label>Strokes</label>
+            <div class="select-container full-width">
+                <select class="full-width" [(ngModel)]="selectedStroke" (ngModelChange)="getTrainingPerformances()">
+                    <option ngValue="">All strokes</option>
+                    <option [ngValue]="stroke.name" *ngFor="let stroke of strokes">{{stroke.name}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-wrapper" *ngIf="trainingPerformances.length > 0">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>SWIMMER</th>
+                    <th>TRAINING</th>
+                    <th>SQUAD</th>
+                    <th>STROKE</th>
+                    <th>TIME</th>
+                    <th>POINTS</th>
+                    <th>TRAINING DATE</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr
+                    *ngFor="let performance of trainingPerformances | paginate: { itemsPerPage: limit, currentPage: page, totalItems: totalCount }">
+                    <td>
+                        <div class="initials">
+                            <ngx-avatars size="50" [name]="performance.squad_member.user.firstName+' '+performance.squad_member.user.lastName"></ngx-avatars>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="details">
+                            <p class="heading">{{performance.squad_member.user.firstName}} {{performance.squad_member.user.lastName}}</p>
+                            <p class="text">{{performance.squad_member.user.dateOfBirth | date:'mediumDate'}}</p>
+                        </div>
+                    </td>
+                    <td>
+                        <p class="text">{{performance.training.name}}</p>
+                    </td>
+                    <td>
+                        <p class="text">{{performance.squad_member.squad.name}}</p>
+                    </td>
+                    <td>
+                        <p class="text">{{performance.stroke.name}}</p>
+                    </td>
+                    <td>
+                        <p class="text">{{performance.time}}</p>
+                    </td>
+                    <td>
+                        <p class="text">{{performance.points}}</p>
+                    </td>
+                    <td>
+                        <p class="text">{{performance.trainingDate | date:'short'}}</p>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <p class="action" (click)="toggleTrainingPerformanceModal('edit', performance);">
+                                Edit
+                            </p>
+                            <p class="action red" style="margin-left: 20px;" (click)="deleteTrainingPerformance(performance.id);">
+                                Delete
+                            </p>
+                        </div>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="pagination d-flex justify-content-center" *ngIf="trainingPerformances.length > 0">
+            <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+        </div>
+    </div>
+</div>
+
+<app-training-performance-modal [(visible)]="showPerformanceModal" [squadMembers]="squadMembers"  [trainings]="trainings" [strokes]="strokes" [action]="trainingAction"
+    [performance]="selectedPerformance" (actionSuccessful)="getTrainingPerformances()"></app-training-performance-modal>

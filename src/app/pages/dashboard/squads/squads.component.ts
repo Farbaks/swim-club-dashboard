@@ -114,7 +114,7 @@ export class SquadsComponent {
                     return;
                 }
 
-                this.generalService.showSuccessMessage('Squad member added successfully.');
+                this.generalService.showSuccessMessage('Squad member removed successfully.');
                 this.getSquads();
                 this.getSquadMembers();
 

@@ -1,0 +1,72 @@
+<nz-modal [(nzVisible)]="visible" [nzTitle]="title" (nzOnCancel)="handleCancel()"
+    [nzFooter]="nzModalFooter">
+    <div *nzModalContent>
+        <app-error-message [message]="errorMessage"></app-error-message>
+        <form class="sub-form" [formGroup]="form" (ngSubmit)="submit()">
+            <div class="input-box full-width">
+                <label>Training Name</label>
+                <input type="text" placeholder="Championship training" formControlName="name"
+                    [class.error-input]="form['controls']['name'].errors && form['controls']['name'].touched" />
+            </div>
+            <div class="input-box full-width">
+                <label>Description</label>
+                <textarea formControlName="description"
+                    [class.error-input]="form['controls']['description'].errors && form['controls']['description'].touched"></textarea>
+            </div>
+            <div class="input-box half-width">
+                <label>Start Time</label>
+                <input type="time" placeholder="13:00" formControlName="startTime"
+                    [class.error-input]="form['controls']['startTime'].errors && form['controls']['startTime'].touched" />
+            </div>
+            <div class="input-box half-width">
+                <label>End Time</label>
+                <input type="time" placeholder="14:30" formControlName="endTime"
+                    [class.error-input]="form['controls']['endTime'].errors && form['controls']['endTime'].touched" />
+            </div>
+            <div class="input-box half-width">
+                <label>Day of the week</label>
+                <div class="select-container full-width">
+                    <select class="full-width" formControlName="day"
+                        [class.error-input]="form['controls']['day'].errors && form['controls']['day'].touched">
+                        <option value="" disabled>Select a day</option>
+                        <option value="monday">Monday</option>
+                        <option value="tuesday">Tuesday</option>
+                        <option value="wednesday">Wednesday</option>
+                        <option value="thursday">Thursday</option>
+                        <option value="friday">Friday</option>
+                        <option value="saturday">Saturday</option>
+                        <option value="sunday">Sunday</option>
+                    </select>
+                </div>
+            </div>
+            <div class="input-box half-width">
+                <label>Interval</label>
+                <div class="select-container full-width">
+                    <select class="full-width" formControlName="interval"
+                        [class.error-input]="form['controls']['interval'].errors && form['controls']['interval'].touched">
+                        <option value="" disabled>Select an Interval</option>
+                        <option value="once">This is a one time event</option>
+                        <option value="weekly">Weekly</option>
+                    </select>
+                </div>
+            </div>
+            <div class="input-box full-width">
+                <label>Squad</label>
+                <div class="select-container full-width">
+                    <select class="full-width" formControlName="squadId"
+                        [class.error-input]="form['controls']['squadId'].errors && form['controls']['squadId'].touched">
+                        <option ngValue="" disabled>Select a squad</option>
+                        <option [ngValue]="squad.id" *ngFor="let squad of squads">{{squad.name}}</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+</nz-modal>
+
+<ng-template #nzModalFooter>
+    <div class="d-flex justify-content-end">
+        <button class="button-cancel" (click)="handleCancel()">Cancel</button>
+        <button class="button-primary" (click)="submit()" [ladda]="processLoading">{{buttonText}}</button>
+    </div>
+</ng-template>

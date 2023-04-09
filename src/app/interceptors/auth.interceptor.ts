@@ -28,19 +28,11 @@ export class AuthInterceptor implements HttpInterceptor {
         return next.handle(request).pipe(
             catchError((error:any) => {
                 if (error.status === 403 || error.status === 401) {
-                    // this.generalService.logoutUser();
-                    return throwError(() => ({
-                        statusCode: 403,
-                        message: 'Your session has expired. Please login to continue.'
-                    }));
+                    this.generalService.logoutUser();
+                    return throwError('Your session has expired. Please login to continue.');
                 }
-                else {
-                    // console.log(error)
-                    return throwError(() => ({
-                        statusCode: 500,
-                        message: error
-                    }));
-                }
+
+                return throwError(error.error?.message ?? 'An expected error occured. Please try again later.');
             })
         );
     }

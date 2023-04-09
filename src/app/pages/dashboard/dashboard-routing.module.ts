@@ -20,6 +20,14 @@ const routes: Routes = [
                 loadChildren: () => import('./squads/squads.module').then(m => m.SquadsModule)
             },
             {
+                path: 'trainings',
+                loadChildren: () => import('./trainings/trainings.module').then(m => m.TrainingsModule)
+            },
+            {
+                path: 'training-performance',
+                loadChildren: () => import('./training-performance/training-performance.module').then(m => m.TrainingPerformanceModule)
+            },
+            {
                 path: 'settings',
                 loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule)
             },

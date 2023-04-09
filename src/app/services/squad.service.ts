@@ -29,6 +29,10 @@ export class SquadService {
         return this.apiService.get(`squads/${squadId}/members?page=${page}&limit=${limit}&query=${query}`);
     }
 
+    getAllSquadMembers() {
+        return this.apiService.get(`squads-members`);
+    }
+
     removeSquadMember(squadId: string, squadMemberId: number) {
         return this.apiService.delete(`squads/${squadId}/members/${squadMemberId}`);
     }

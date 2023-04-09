@@ -1,0 +1,91 @@
+<div class="side-page">
+    <div class="top d-flex align-items-center justify-content-between">
+        <div class="left">
+            <h1 class="text-black-1">Trainings</h1>
+            <p class="text-black-5">View all squad trainings.</p>
+        </div>
+        <div class="right">
+            <button class="button-primary" (click)="toggleTrainingModal('new');">+ Add Training</button>
+        </div>
+    </div>
+
+    <div class="filter-box d-flex justify-content-start">
+        <div class="input-box search-box">
+            <label>Search for trainings</label>
+            <div class="input-container">
+                <span class="before" nz-icon nzType="search" nzTheme="outline"></span>
+                <input type="search" placeholder="Search for name, description" [(ngModel)]="query"
+                    (ngModelChange)="getTrainings()" />
+            </div>
+        </div>
+        <div class="input-box">
+            <label>Squads</label>
+            <div class="select-container full-width">
+                <select class="full-width" [(ngModel)]="selectedSquad" (ngModelChange)="getTrainings()">
+                    <option ngValue="">All squads</option>
+                    <option [ngValue]="squad.name" *ngFor="let squad of squads">{{squad.name}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-wrapper">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>NAME</th>
+                    <th>DESCRIPTION</th>
+                    <th>START TIME</th>
+                    <th>END TIME</th>
+                    <th>DAY</th>
+                    <th>INTERVAL</th>
+                    <th>SQUAD</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr
+                    *ngFor="let training of trainings | paginate: { itemsPerPage: limit, currentPage: page, totalItems: totalCount }">
+                    <td>
+                        <p class="text">{{training.name}}</p>
+                    </td>
+                    <td>
+                        <p class="text">{{training.description}}</p>
+                    </td>
+                    <td>
+                        <p class="text">{{training.startTime}}</p>
+                    </td>
+                    <td>
+                        <p class="text">{{training.endTime}}</p>
+                    </td>
+                    <td>
+                        <p class="text">{{training.day | titlecase}}</p>
+                    </td>
+                    <td>
+                        <p class="text">{{training.interval | titlecase}}</p>
+                    </td>
+                    <td>
+                        <p class="text">{{training.squad.name}}</p>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <p class="action" (click)="toggleTrainingModal('edit', training);">
+                                Edit
+                            </p>
+                            <p class="action red" style="margin-left: 20px;" (click)="deleteTraining(training.id);">
+                                Delete
+                            </p>
+                        </div>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="pagination d-flex justify-content-center" *ngIf="trainings.length > 0">
+            <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+        </div>
+    </div>
+</div>
+
+<app-trainings-modal [(visible)]="showTrainingModal" [squads]="squads" [action]="trainingAction"
+    [training]="selectedTraining" (actionSuccessful)="getTrainings()"></app-trainings-modal>

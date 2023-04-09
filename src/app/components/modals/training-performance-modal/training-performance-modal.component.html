@@ -1,0 +1,60 @@
+<nz-modal [(nzVisible)]="visible" [nzTitle]="title" (nzOnCancel)="handleCancel()"
+    [nzFooter]="nzModalFooter">
+    <div *nzModalContent>
+        <app-error-message [message]="errorMessage"></app-error-message>
+        <form class="sub-form" [formGroup]="form" (ngSubmit)="submit()">
+            <div class="input-box full-width">
+                <label>Swimmer</label>
+                <div class="select-container full-width">
+                    <select class="full-width" formControlName="squadMemberId"
+                        [class.error-input]="form['controls']['squadMemberId'].errors && form['controls']['squadMemberId'].touched">
+                        <option ngValue="" disabled>Select a swimmer</option>
+                        <option [ngValue]="member.id" *ngFor="let member of squadMembers">{{member.user.firstName}} {{member.user.lastName}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="input-box full-width">
+                <label>Training</label>
+                <div class="select-container full-width">
+                    <select class="full-width" formControlName="trainingId"
+                        [class.error-input]="form['controls']['trainingId'].errors && form['controls']['trainingId'].touched">
+                        <option ngValue="" disabled>Select a training</option>
+                        <option [ngValue]="training.id" *ngFor="let training of trainings">{{training.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="input-box half-width">
+                <label>Training Date</label>
+                <input type="date" formControlName="trainingDate"
+                    [class.error-input]="form['controls']['trainingDate'].errors && form['controls']['trainingDate'].touched" />
+            </div>
+            <div class="input-box half-width">
+                <label>Stroke</label>
+                <div class="select-container full-width">
+                    <select class="full-width" formControlName="strokeId"
+                        [class.error-input]="form['controls']['strokeId'].errors && form['controls']['strokeId'].touched">
+                        <option ngValue="" disabled>Select a stroke</option>
+                        <option [ngValue]="stroke.id" *ngFor="let stroke of strokes">{{stroke.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="input-box half-width">
+                <label>Time</label>
+                <input type="text" placeholder="01:30.000" formControlName="time"
+                    [class.error-input]="form['controls']['time'].errors && form['controls']['time'].touched" />
+            </div>
+            <div class="input-box half-width">
+                <label>Points</label>
+                <input type="number" placeholder="45" formControlName="points"
+                    [class.error-input]="form['controls']['points'].errors && form['controls']['points'].touched" />
+            </div>
+        </form>
+    </div>
+</nz-modal>
+
+<ng-template #nzModalFooter>
+    <div class="d-flex justify-content-end">
+        <button class="button-cancel" (click)="handleCancel()">Cancel</button>
+        <button class="button-primary" (click)="submit()" [ladda]="processLoading">{{buttonText}}</button>
+    </div>
+</ng-template>
