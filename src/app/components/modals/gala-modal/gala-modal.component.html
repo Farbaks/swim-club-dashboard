@@ -1,0 +1,39 @@
+<nz-modal [(nzVisible)]="visible" [nzTitle]="title" (nzOnCancel)="handleCancel()"
+    [nzFooter]="nzModalFooter">
+    <div *nzModalContent>
+        <app-error-message [message]="errorMessage"></app-error-message>
+        <form class="sub-form" [formGroup]="form" (ngSubmit)="submit()">
+            <div class="input-box full-width">
+                <label>Gala Name</label>
+                <input type="text" placeholder="Staffordshire Swimming Championship 2023" formControlName="name"
+                    [class.error-input]="form['controls']['name'].errors && form['controls']['name'].touched" />
+            </div>
+            <div class="input-box full-width">
+                <label>Description</label>
+                <textarea formControlName="description"
+                    [class.error-input]="form['controls']['description'].errors && form['controls']['description'].touched"></textarea>
+            </div>
+            <div class="input-box full-width">
+                <label>Requirements (Optional)</label>
+                <textarea formControlName="requirements"></textarea>
+            </div>
+            <div class="input-box half-width">
+                <label>Start Date</label>
+                <input type="date" formControlName="startDate"
+                    [class.error-input]="form['controls']['startDate'].errors && form['controls']['startDate'].touched" />
+            </div>
+            <div class="input-box half-width">
+                <label>End Date</label>
+                <input type="date" formControlName="endDate"
+                    [class.error-input]="form['controls']['endDate'].errors && form['controls']['endDate'].touched" />
+            </div>
+        </form>
+    </div>
+</nz-modal>
+
+<ng-template #nzModalFooter>
+    <div class="d-flex justify-content-end">
+        <button class="button-cancel" (click)="handleCancel()">Cancel</button>
+        <button class="button-primary" (click)="submit()" [ladda]="processLoading">{{buttonText}}</button>
+    </div>
+</ng-template>

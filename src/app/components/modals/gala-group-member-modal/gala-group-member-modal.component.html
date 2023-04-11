@@ -1,0 +1,52 @@
+<nz-modal [(nzVisible)]="visible" [nzTitle]="title" (nzOnCancel)="handleCancel()" [nzFooter]="nzModalFooter">
+    <div *nzModalContent>
+        <app-error-message [message]="errorMessage"></app-error-message>
+        <form class="sub-form" [formGroup]="form" (ngSubmit)="submit()">
+            <div class="input-box full-width">
+                <label>Select swimmer type</label>
+                <nz-radio-group [(ngModel)]="isMemberOfClub" (ngModelChange)="changeSwimmerType()" [ngModelOptions]="{standalone: true}">
+                    <label nz-radio [nzValue]="true">This swimmer is a member of this club</label>
+                    <label nz-radio [nzValue]="false">This swimmer is not a member of this club</label>
+                </nz-radio-group>
+            </div>
+            <ng-container *ngIf="isMemberOfClub">
+                <div class="input-box full-width">
+                    <label>Swimmer</label>
+                    <div class="select-container full-width">
+                        <select class="full-width" formControlName="swimmerId"
+                            [class.error-input]="form['controls']['swimmerId'].errors && form['controls']['swimmerId'].touched">
+                            <option value="" disabled>Select a swimmer</option>
+                            <option [ngValue]="swimmer.id" *ngFor="let swimmer of swimmers">{{swimmer.firstName}}
+                                {{swimmer.lastName}}</option>
+                        </select>
+                    </div>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="!isMemberOfClub">
+                <div class="input-box full-width">
+                    <label>Swimmer Name</label>
+                    <input type="text" placeholder="Farouk Bakre" formControlName="name"
+                        [class.error-input]="form['controls']['name'].errors && form['controls']['name'].touched" />
+                </div>
+                <div class="input-box half-width">
+                    <label>Age</label>
+                    <input type="number" placeholder="14" formControlName="age"
+                        [class.error-input]="form['controls']['age'].errors && form['controls']['age'].touched" />
+                </div>
+                <div class="input-box half-width">
+                    <label>CLub</label>
+                    <input type="text" placeholder="Staffordshire Swimming Club" formControlName="club"
+                        [class.error-input]="form['controls']['club'].errors && form['controls']['club'].touched" />
+                </div>
+            </ng-container>
+            
+        </form>
+    </div>
+</nz-modal>
+
+<ng-template #nzModalFooter>
+    <div class="d-flex justify-content-end">
+        <button class="button-cancel" (click)="handleCancel()">Cancel</button>
+        <button class="button-primary" (click)="submit()" [ladda]="processLoading">{{buttonText}}</button>
+    </div>
+</ng-template>

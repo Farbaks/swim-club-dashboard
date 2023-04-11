@@ -1,0 +1,122 @@
+<div class="side-page">
+    <div class="top d-flex align-items-center justify-content-between">
+        <div class="left">
+            <nz-breadcrumb>
+                <nz-breadcrumb-item>
+                  <a [routerLink]="['../']">Galas</a>
+                </nz-breadcrumb-item>
+                <nz-breadcrumb-item>{{gala?.name}}</nz-breadcrumb-item>
+              </nz-breadcrumb>
+            <h1 class="text-black-1">{{gala?.name}}</h1>
+            <p class="text-black-5" style="margin-bottom: 5px;">
+                <i>{{gala?.startDate | date:'mediumDate'}}</i> - <i>{{gala?.endDate | date:'mediumDate'}}</i>
+            </p>
+            <p class="text-black-5">
+                {{gala?.description}}
+            </p>
+            <p class="text-black-5 col-12 col-lg-6">
+                {{gala?.requirements}}
+            </p>
+        </div>
+        <div class="right">
+            <button class="button-primary" (click)="toggleGroupModal('new');">+ Add Group</button>
+        </div>
+    </div>
+
+    <div class="filter-box d-flex justify-content-start">
+        <div class="input-box search-box full-width">
+            <label>Search for groups</label>
+            <div class="input-container">
+                <span class="before" nz-icon nzType="search" nzTheme="outline"></span>
+                <input type="search" placeholder="Search" [(ngModel)]="query" (ngModelChange)="refresh('new')" />
+            </div>
+        </div>
+    </div>
+
+    <div class="details-body d-flex align-items-start justify-content-between">
+        <div class="left" [class.open-details]="showGroupDetails">
+            <div class="card-list d-flex flex-row flex-wrap">
+                <div class="card-item" [class.selected-item]="group.id == selectedGroup?.id" *ngFor="let group of groups" (click)="toggleGroupDetails(group)">
+                    <div class="initials">
+                        <ngx-avatars size="50" [name]="group.name.split(' ').splice(0,2).join(' ')" [round]="false"
+                            cornerRadius="5"></ngx-avatars>
+                    </div>
+                    <h2>{{group.name}}</h2>
+                    <p class="text">Description: <b>{{group.description}}</b></p>
+                    <p class="text">{{group.race_members?.length}} Swimmer(s)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card Details -->
+        <div class="card-details" *ngIf="selectedGroup" [class.open-details]="showGroupDetails">
+            <div class="right">
+                <button class="button-primary-2" (click)="toggleGroupModal('edit')">
+                    <span nz-icon nzType="edit" nzTheme="outline"></span>
+                    Edit Group Details
+                </button>
+            </div>
+            <div class="initials">
+                <ngx-avatars size="50" [name]="selectedGroup.name.split(' ').splice(0,2).join(' ')" [round]="false"
+                    cornerRadius="5"></ngx-avatars>
+            </div>
+            <h2 class="col-12 col-lg-8">{{selectedGroup?.name}}</h2>
+            <p class="text">{{selectedGroup?.race_members?.length}} Swimmer(s)</p>
+            <p class="text">
+                Description: {{selectedGroup?.description ?? 'N/A'}}
+            </p>
+            <div class="filter d-flex align-items-center justify-content-between">
+                <div class="input-container">
+                    <span class="before" nz-icon nzType="search" nzTheme="outline"></span>
+                    <input type="search" placeholder="Search" [(ngModel)]="groupMembersQuery"
+                        (ngModelChange)="getGroupMembers()" />
+                </div>
+                <button class="button-primary-2" (click)="showGroupMemberModal = true;">+ Add Member</button>
+            </div>
+
+            <div class="table-wrapper">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>NAME</th>
+                            <th>AGE</th>
+                            <th>CLUB</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            *ngFor="let user of selectedGroup?.race_members">
+                            <td>
+                                <div>
+                                    <ngx-avatars size="35" [name]="user.name"></ngx-avatars>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="details">
+                                    <p class="heading">{{user.name}}</p>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="text">{{user.age}}</p>
+                            </td>
+                            <td>
+                                <p class="text">{{user.club || 'N/A'}}</p>
+                            </td>
+                            <td>
+                                <p class="action red" (click)="removeMember(user.id);">Delete</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-gala-group-modal [(visible)]="showGroupModal" [galaId]="galaId" [action]="groupAction" [group]="selectedGroup"
+    (actionSuccessful)="refresh(groupAction)"></app-gala-group-modal>
+
+<app-gala-group-member-modal [(visible)]="showGroupMemberModal" [swimmers]="swimmers" [group]="selectedGroup"
+(actionSuccessful)="getGalaGroups();getGroupMembers()"></app-gala-group-member-modal>

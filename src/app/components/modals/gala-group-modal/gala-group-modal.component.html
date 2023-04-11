@@ -1,0 +1,24 @@
+<nz-modal [(nzVisible)]="visible" [nzTitle]="title" (nzOnCancel)="handleCancel()"
+    [nzFooter]="nzModalFooter">
+    <div *nzModalContent>
+        <app-error-message [message]="errorMessage"></app-error-message>
+        <form class="sub-form" [formGroup]="form" (ngSubmit)="submit()">
+            <div class="input-box full-width">
+                <label>Group Name</label>
+                <input type="text" placeholder="Staffordshire Swimming Championship 2023" formControlName="name"
+                    [class.error-input]="form['controls']['name'].errors && form['controls']['name'].touched" />
+            </div>
+            <div class="input-box full-width">
+                <label>Description (Optional)</label>
+                <textarea formControlName="description"></textarea>
+            </div>
+        </form>
+    </div>
+</nz-modal>
+
+<ng-template #nzModalFooter>
+    <div class="d-flex justify-content-end">
+        <button class="button-cancel" (click)="handleCancel()">Cancel</button>
+        <button class="button-primary" (click)="submit()" [ladda]="processLoading">{{buttonText}}</button>
+    </div>
+</ng-template>

@@ -20,6 +20,10 @@ const routes: Routes = [
                 loadChildren: () => import('./squads/squads.module').then(m => m.SquadsModule)
             },
             {
+                path: 'swimmers',
+                loadChildren: () => import('./swimmers/swimmers.module').then(m => m.SwimmersModule)
+            },
+            {
                 path: 'trainings',
                 loadChildren: () => import('./trainings/trainings.module').then(m => m.TrainingsModule)
             },
@@ -28,12 +32,26 @@ const routes: Routes = [
                 loadChildren: () => import('./training-performance/training-performance.module').then(m => m.TrainingPerformanceModule)
             },
             {
-                path: 'settings',
-                loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule)
+                path: 'galas',
+                children: [
+                    {
+                        path: '',
+                        loadChildren: () => import('./galas/galas.module').then(m => m.GalasModule),
+                    },
+                    {
+                        path: ':id',
+                        loadChildren: () => import('./gala-details/gala-details.module').then(m => m.GalaDetailsModule)
+                    },
+                ]
             },
             {
-                path: 'events',
-                loadChildren: () => import('./events/events.module').then(m => m.EventsModule)
+                path: 'gala-results',
+                loadChildren: () => import('./gala-results/gala-results.module').then(m => m.GalaResultsModule)
+            },
+
+            {
+                path: 'settings',
+                loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule)
             },
             {
                 path: '**',

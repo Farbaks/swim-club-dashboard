@@ -1,0 +1,77 @@
+<div class="side-page">
+    <div class="top d-flex align-items-center justify-content-between">
+        <div class="left">
+            <h1 class="text-black-1">Galas</h1>
+            <p class="text-black-5">View all gala events.</p>
+        </div>
+        <div class="right">
+            <button class="button-primary" (click)="toggleGalaModal('new');">+ Add Gala</button>
+        </div>
+    </div>
+
+    <div class="filter-box d-flex justify-content-start">
+        <div class="input-box search-box">
+            <label>Search for events</label>
+            <div class="input-container">
+                <span class="before" nz-icon nzType="search" nzTheme="outline"></span>
+                <input type="search" placeholder="Search by name, description" [(ngModel)]="query"
+                    (ngModelChange)="getGalas()" />
+            </div>
+        </div>
+    </div>
+
+    <div class="table-wrapper">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>NAME</th>
+                    <th>DESCRIPTION</th>
+                    <th>REQUIREMENTS</th>
+                    <th>START DATE</th>
+                    <th>END DATE</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr
+                    *ngFor="let gala of galas | paginate: { itemsPerPage: limit, currentPage: page, totalItems: totalCount }">
+                    <td>
+                        <p class="text">{{gala.name}}</p>
+                    </td>
+                    <td>
+                        <p class="text">{{gala.description}}</p>
+                    </td>
+                    <td>
+                        <p class="text">{{gala.requirements || 'N/A'}}</p>
+                    </td>
+                    <td>
+                        <p class="text">{{gala.startDate | date:'mediumDate'}}</p>
+                    </td>
+                    <td>
+                        <p class="text">{{gala.endDate | date:'mediumDate'}}</p>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <p class="action" [routerLink]="gala.id">
+                                View
+                            </p>
+                            <p class="action" style="margin-left: 20px;" (click)="toggleGalaModal('edit', gala);">
+                                Edit
+                            </p>
+                            <p class="action red" style="margin-left: 20px;" (click)="deleteGala(gala.id);">
+                                Delete
+                            </p>
+                        </div>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="pagination d-flex justify-content-center" *ngIf="galas.length > 0">
+            <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+        </div>
+    </div>
+</div>
+
+<app-gala-modal [(visible)]="showGalaModal" [action]="galaAction"
+    [gala]="selectedGala" (actionSuccessful)="getGalas()"></app-gala-modal>
