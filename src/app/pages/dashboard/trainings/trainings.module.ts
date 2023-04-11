@@ -8,7 +8,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { AvatarModule } from 'ngx-avatars';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { TrainingsModalModule } from 'src/app/components/modals/trainings-modal/trainings-modal.module';
-
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
 
 @NgModule({
     declarations: [
@@ -21,7 +21,8 @@ import { TrainingsModalModule } from 'src/app/components/modals/trainings-modal/
         NzIconModule,
         AvatarModule,
         NgxPaginationModule,
-        TrainingsModalModule
+        TrainingsModalModule,
+        NzEmptyModule
     ]
 })
 export class TrainingsModule { }
