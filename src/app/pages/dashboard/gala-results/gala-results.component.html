@@ -1,1 +1,80 @@
-<p>gala-results works!</p>
+<div class="side-page">
+    <div class="top d-flex align-items-center justify-content-between">
+        <div class="left">
+            <h1 class="text-black-1">Gala Results</h1>
+            <p class="text-black-5">View all gala event results.</p>
+        </div>
+    </div>
+
+    <div class="filter-box d-flex justify-content-start align-items-end">
+        <div class="input-box search-box">
+            <label>Flter by Gala</label>
+            <div class="select-container full-width">
+                <select class="full-width" [(ngModel)]="selectedGalaFilter">
+                    <option ngValue="" disabled>Select a gala event</option>
+                    <option [ngValue]="gala" *ngFor="let gala of galas">{{gala.name}}</option>
+                </select>
+            </div>
+        </div>
+        <button class="button-primary" (click)="getOneGala()">Get Gala Result</button>
+    </div>
+
+    <div class="result-body">
+        <div class="result-item d-flex align-item-start justify-content-between" *ngFor="let m of [1,2,3,4,5]">
+            <div class="left">
+                <h2 class="text-black-1">
+                    Men's 14-19yrs 50m Freestyle
+                </h2>
+                <p class="text-black-5">
+                    This s the description for this specific gala group
+                </p>
+            </div>
+            <div class="right">
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>NAME</th>
+                                <th>AGE</th>
+                                <th>CLUB</th>
+                                <th>TIME</th>
+                                <th>POINTS</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let n of [1,1,1,1,1,1]">
+                                <td>
+                                    <div class="initials">
+                                        <ngx-avatars size="35" [name]="'Farouk Bakre'"></ngx-avatars>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="details">
+                                        <p class="heading">Farouk Bakre</p>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p class="text">18</p>
+                                </td>
+                                <td>
+                                    <p class="text">Stafford</p>
+                                </td>
+                                <td>
+                                    <p class="text">20.000</p>
+                                </td>
+                                <td>
+                                    <p class="text">150</p>
+                                </td>
+                                <td>
+                                    <p class="action">Edit</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

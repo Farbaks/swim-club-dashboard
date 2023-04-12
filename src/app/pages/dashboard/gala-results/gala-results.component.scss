@@ -1,0 +1,32 @@
+button {
+    width: fit-content;
+    margin: 0 0 20px 16px;
+}
+.result-body {
+    width: 100%;
+    padding: 32px 0;
+    .result-item {
+        margin-bottom: 32px;
+        position: relative;
+        top: 0;
+        .left {
+            width: 35%;
+            height: max-content;
+            padding-top: 30px;
+            position: sticky;
+            top: 30px;
+            h2 {
+                font-size: 18px;
+                font-weight: 500;
+                margin-bottom: 10px;
+            }
+            p {
+                font-size: 13px;
+                font-weight: 400;
+            }
+        }
+        .right {
+            width: 60%;
+        }
+    }
+}

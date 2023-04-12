@@ -27,6 +27,10 @@ export class GalasService {
         return this.apiService.get(`galas?page=${page}&limit=${limit}&query=${query}`);
     }
 
+    getAllGalas() {
+        return this.apiService.get(`all-galas`);
+    }
+
     getOneGala(id:string) {
         return this.apiService.get(`galas/${id}`);
     }
