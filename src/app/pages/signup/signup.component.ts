@@ -78,8 +78,9 @@ export class SignupComponent implements OnInit {
                 this.router.navigateByUrl('/dashboard');
 
             },
-            error: (e:any) => {
-                // this.errorMessage = 
+            error: (error:any) => {
+                this.processLoading = false;
+                this.errorMessage = error;
             }
         })
         

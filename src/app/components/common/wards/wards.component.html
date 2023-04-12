@@ -1,1 +1,60 @@
-<p>wards works!</p>
+<div class="mt-4">
+    <div class="top d-flex align-items-center justify-content-between">
+        <div class="left">
+            <p class="text-black-5 mt-3" style="margin-bottom: 5px;">
+                Add, view and edit ward details. 
+            </p>
+        </div>
+        <div class="right">
+            <button class="button-primary" (click)="toggleWardModal('new');">+ Add Ward</button>
+        </div>
+    </div>
+
+    <div class="table-wrapper">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>NAME</th>
+                    <th>PHONE</th>
+                    <th>GENDER</th>
+                    <th>ROLE</th>
+                    <th>DATE OF BIRTH</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let relationship of wards">
+                    <td>
+                        <div class="initials">
+                            <ngx-avatars size="50" [name]="relationship.ward.firstName+' '+relationship.ward.lastName"></ngx-avatars>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="details">
+                            <p class="heading">{{relationship.ward.firstName}} {{relationship.ward.lastName}}</p>
+                            <p class="text">{{relationship.ward.emailAddress}}</p>
+                        </div>
+                    </td>
+                    <td>
+                        <p class="text">{{relationship.ward.phoneNumber}}</p>
+                    </td>
+                    <td>
+                        <p class="text">{{relationship.ward.gender | titlecase}}</p>
+                    </td>
+                    <td>
+                        <p class="tag">{{relationship.ward.role | titlecase}}</p>
+                    </td>
+                    <td>
+                        <p class="text">{{relationship.ward.dateOfBirth | date:'mediumDate'}}</p>
+                    </td>
+                    <td>
+                        <p class="action" (click)="toggleWardModal('edit', relationship);">Edit</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<app-ward-modal [(visible)]="showWardModal" [action]="wardAction" [user]="selectedWard" (actionSuccessful)="getWards()"></app-ward-modal>

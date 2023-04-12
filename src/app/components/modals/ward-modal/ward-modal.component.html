@@ -1,0 +1,75 @@
+<nz-modal [(nzVisible)]="visible" [nzTitle]="title" (nzOnCancel)="handleCancel()"
+    [nzFooter]="nzModalFooter">
+    <div *nzModalContent>
+        <app-error-message [message]="errorMessage"></app-error-message>
+        <form class="sub-form" [formGroup]="form" (ngSubmit)="submit()">
+            <div class="input-box half-width">
+                <label>First Name</label>
+                <input type="text" placeholder="John" autocomplete="given-name" formControlName="firstName"
+                    [class.error-input]="form['controls']['firstName'].errors && form['controls']['firstName'].touched" />
+            </div>
+            <div class="input-box half-width">
+                <label>Last Name</label>
+                <input type="text" placeholder="Doe" autocomplete="family-name" formControlName="lastName"
+                    [class.error-input]="form['controls']['lastName'].errors && form['controls']['lastName'].touched" />
+            </div>
+            <div class="input-box half-width">
+                <label>Phone Number</label>
+                <input type="text" placeholder="+447549404731" autocomplete="tel" formControlName="phoneNumber"
+                    [class.error-input]="form['controls']['phoneNumber'].errors && form['controls']['phoneNumber'].touched" />
+            </div>
+            <div class="input-box half-width">
+                <label>Email Address</label>
+                <input type="email" placeholder="johndoe@example.com" autocomplete="email"
+                    formControlName="emailAddress"
+                    [class.error-input]="form['controls']['emailAddress'].errors && form['controls']['emailAddress'].touched" />
+            </div>
+            <div class="input-box half-width">
+                <label>Date of Birth</label>
+                <input type="date" [class.disabled-input]="action == 'edit'" placeholder="johndoe@example.com" autocomplete="bday" formControlName="dateOfBirth"
+                    [class.error-input]="form['controls']['dateOfBirth'].errors && form['controls']['dateOfBirth'].touched" />
+            </div>
+            <div class="input-box half-width">
+                <label>Gender</label>
+                <div class="select-container full-width">
+                    <select class="full-width" formControlName="gender" 
+                        [class.error-input]="form['controls']['gender'].errors && form['controls']['gender'].touched">
+                        <option value="" disabled>Select a gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="others">Prefer not to say</option>
+                    </select>
+                </div>
+            </div>
+            <div class="input-box full-width" *ngIf="action == 'new'">
+                <label>Password</label>
+                <div class="input-container"
+                    [class.error-input]="form['controls']['password'].errors && form['controls']['password'].touched">
+                    <input type="password" autocomplete="new-password" #passwordField placeholder="********"
+                        formControlName="password" />
+                    <i nz-icon nzType="eye-invisible" nzTheme="outline" *ngIf="passwordField.type == 'text'"
+                        (click)="passwordField.type = 'password'"></i>
+                    <i nz-icon nzType="eye" nzTheme="outline" *ngIf="passwordField.type == 'password'"
+                        (click)="passwordField.type = 'text'"></i>
+                </div>
+            </div>
+            <div class="input-box full-width">
+                <label>Address</label>
+                <input type="text" placeholder="Stafforshire Uni" autocomplete="address-line1" formControlName="address"
+                    [class.error-input]="form['controls']['address'].errors && form['controls']['address'].touched" />
+            </div>
+            <div class="input-box full-width">
+                <label>Post Code</label>
+                <input type="text" placeholder="STQ7FA" autocomplete="postal-code" formControlName="postcode"
+                    [class.error-input]="form['controls']['postcode'].errors && form['controls']['postcode'].touched" />
+            </div>
+        </form>
+    </div>
+</nz-modal>
+
+<ng-template #nzModalFooter>
+    <div class="d-flex justify-content-end">
+        <button class="button-cancel" (click)="handleCancel()">Cancel</button>
+        <button class="button-primary" (click)="submit()" [ladda]="processLoading">{{buttonText}}</button>
+    </div>
+</ng-template>

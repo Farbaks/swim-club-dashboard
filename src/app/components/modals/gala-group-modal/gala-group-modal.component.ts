@@ -95,6 +95,7 @@ export class GalaGroupModalComponent {
                 },
                 error: (e: any) => {
                     this.processLoading = false;
+                    this.errorMessage = e;
                     this.generalService.showErrorMessage('An error occured. Please try again later.')
                 }
             })
@@ -116,6 +117,7 @@ export class GalaGroupModalComponent {
             },
             error: (e: any) => {
                 this.processLoading = false;
+                this.errorMessage = e;
                 this.generalService.showErrorMessage('An error occured. Please try again later.')
             }
         })

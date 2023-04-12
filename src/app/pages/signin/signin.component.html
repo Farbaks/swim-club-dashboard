@@ -9,12 +9,16 @@
         <form class="sub-form" [formGroup]="form" (ngSubmit)="signin()">
             <div class="input-box full-width">
                 <label>Email Address</label>
-                <input type="email" placeholder="johndoe@example.com" autocomplete="email" formControlName="emailAddress" />
+                <input type="email"
+                    [class.error-input]="form['controls']['emailAddress'].errors && form['controls']['emailAddress'].touched"
+                    placeholder="johndoe@example.com" autocomplete="email" formControlName="emailAddress" />
             </div>
             <div class="input-box full-width">
                 <label>Password</label>
-                <div class="input-container">
-                    <input type="password" autocomplete="current-password" #passwordField placeholder="********"  formControlName="password"/>
+                <div class="input-container"
+                    [class.error-input]="form['controls']['password'].errors && form['controls']['password'].touched">
+                    <input type="password" autocomplete="current-password" #passwordField placeholder="********"
+                        formControlName="password" />
                     <i nz-icon nzType="eye-invisible" nzTheme="outline" *ngIf="passwordField.type == 'text'"
                         (click)="passwordField.type = 'password'"></i>
                     <i nz-icon nzType="eye" nzTheme="outline" *ngIf="passwordField.type == 'password'"

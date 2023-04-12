@@ -98,6 +98,7 @@ export class GalaGroupMemberModalComponent {
             },
             error: (e: any) => {
                 this.processLoading = false;
+                this.errorMessage = e;
                 this.generalService.showErrorMessage('An error occured. Please try again later.')
             }
         })
