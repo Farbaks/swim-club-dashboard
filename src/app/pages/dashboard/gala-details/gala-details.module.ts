@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { AvatarModule } from 'ngx-avatars';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
 
 @NgModule({
     declarations: [
@@ -21,6 +22,7 @@ import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
         NzIconModule,
         AvatarModule,
         NzBreadCrumbModule,
+        NzEmptyModule,
         GalaGroupModalModule,
         GalaGroupMemberModalModule
     ]

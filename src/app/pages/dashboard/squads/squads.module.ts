@@ -10,6 +10,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { UsersModalModule } from 'src/app/components/modals/users-modal/users-modal.module';
 import { SquadModalModule } from 'src/app/components/modals/squad-modal/squad-modal.module';
 import { SquadMemberModalModule } from 'src/app/components/modals/squad-member-modal/squad-member-modal.module';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { SquadMemberModalModule } from 'src/app/components/modals/squad-member-m
         NzIconModule,
         AvatarModule,
         NgxPaginationModule,
+        NzEmptyModule,
         SquadModalModule,
         SquadMemberModalModule
     ]

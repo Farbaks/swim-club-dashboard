@@ -27,11 +27,17 @@ export class AuthInterceptor implements HttpInterceptor {
 
         return next.handle(request).pipe(
             catchError((error:any) => {
-                if (error.status === 403 || error.status === 401) {
+                if (error.status === 401) {
                     this.generalService.logoutUser();
                     return throwError('Your session has expired. Please login to continue.');
                 }
-
+                if (error.status === 403) {
+                    this.generalService.logoutUser();
+                    return throwError('You\'re not authorized to perform this action.');
+                }
+                if(error.status == 500) {
+                    return throwError('An expected error occured. Please try again later.');
+                }
                 return throwError(error.error?.message ?? 'An expected error occured. Please try again later.');
             })
         );

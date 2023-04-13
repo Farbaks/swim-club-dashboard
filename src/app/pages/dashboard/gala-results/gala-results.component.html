@@ -19,17 +19,17 @@
         <button class="button-primary" (click)="getOneGala()">Get Gala Result</button>
     </div>
 
-    <div class="result-body">
-        <div class="result-item d-flex align-item-start justify-content-between" *ngFor="let m of [1,2,3,4,5]">
+    <div class="result-body" *ngIf="selectedGala">
+        <div class="result-item d-flex flex-column align-item-start justify-content-between" *ngFor="let group of selectedGala.race_groups">
             <div class="left">
                 <h2 class="text-black-1">
-                    Men's 14-19yrs 50m Freestyle
+                    {{group.name}}
                 </h2>
                 <p class="text-black-5">
-                    This s the description for this specific gala group
+                    {{group.description}}
                 </p>
             </div>
-            <div class="right">
+            <aside class="right">
                 <div class="table-wrapper">
                     <table class="data-table">
                         <thead>
@@ -40,41 +40,62 @@
                                 <th>CLUB</th>
                                 <th>TIME</th>
                                 <th>POINTS</th>
+                                <th>RANK</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let n of [1,1,1,1,1,1]">
+                            <tr *ngFor="let swimmer of group.race_members">
                                 <td>
                                     <div class="initials">
-                                        <ngx-avatars size="35" [name]="'Farouk Bakre'"></ngx-avatars>
+                                        <ngx-avatars size="35" [name]="swimmer.name"></ngx-avatars>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="details">
-                                        <p class="heading">Farouk Bakre</p>
+                                        <p class="heading">{{swimmer.name}}</p>
                                     </div>
                                 </td>
                                 <td>
-                                    <p class="text">18</p>
+                                    <p class="text">{{swimmer.age}}</p>
                                 </td>
                                 <td>
-                                    <p class="text">Stafford</p>
+                                    <p class="text">{{swimmer.club || 'College Road SC'}}</p>
                                 </td>
                                 <td>
-                                    <p class="text">20.000</p>
+                                    <p class="text">
+                                        {{swimmer.time }}
+                                        <i  *ngIf="!swimmer.time">Not Added</i>
+                                    </p> 
                                 </td>
                                 <td>
-                                    <p class="text">150</p>
+                                    <p class="text">
+                                        {{swimmer.points }}
+                                        <i  *ngIf="!swimmer.points">Not Added</i>
+                                    </p> 
                                 </td>
                                 <td>
-                                    <p class="action">Edit</p>
+                                    <p class="text">
+                                        {{swimmer.rank }}
+                                        <i  *ngIf="!swimmer.rank">Not Added</i>
+                                    </p> 
+                                </td>
+                                <td>
+                                    <p class="action" (click)="toggleResultModal(swimmer)">Edit</p>
+                                </td>
+                            </tr>
+                            <tr *ngIf="group.race_members.length == 0">
+                                <td colspan="7">
+                                    <nz-empty></nz-empty> `
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </aside>
         </div>
     </div>
 </div>
+
+<app-gala-result-modal [(visible)]="showResultModal" [strokes]="strokes" [result]="selectedGalaResult"
+(actionSuccessful)="getOneGala()"></app-gala-result-modal>

@@ -65,6 +65,11 @@
 
                     </td>
                 </tr>
+                <tr *ngIf="galas.length == 0">
+                    <td colspan="6">
+                        <nz-empty></nz-empty> `
+                    </td>
+                </tr>
             </tbody>
         </table>
         <div class="pagination d-flex justify-content-center" *ngIf="galas.length > 0">

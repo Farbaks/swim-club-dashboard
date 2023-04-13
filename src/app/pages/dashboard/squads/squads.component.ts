@@ -83,6 +83,10 @@ export class SquadsComponent {
         })
     }
 
+    getAgeDifference(date: string) {
+        return new Date().getFullYear() - new Date(date).getFullYear();
+    }
+
     toggleSquadModal(action: 'new' | 'edit') {
         if(action == 'new') this.selectedSquad = undefined;
         this.squadAction = action;

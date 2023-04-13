@@ -23,6 +23,10 @@ export class UserService {
         return this.apiService.get('users/me');
     }
 
+    getSwimmers(page:number, limit:number, squad:string, query:string) {
+        return this.apiService.get(`swimmers?page=${page}&limit=${limit}&squad=${squad}&query=${query}`);
+    }
+
     getUsers(page:number, limit:number, role:string, query:string) {
         return this.apiService.get(`users?page=${page}&limit=${limit}&role=${role}&query=${query}`);
     }

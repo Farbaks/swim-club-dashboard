@@ -74,7 +74,7 @@
                             <th></th>
                             <th>NAME</th>
                             <th>GENDER</th>
-                            <th>DATE OF BIRTH</th>
+                            <th>AGE</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -96,10 +96,15 @@
                                 <p class="text">{{user.gender | titlecase}}</p>
                             </td>
                             <td>
-                                <p class="text">{{user.dateOfBirth | date:'mediumDate'}}</p>
+                                <p class="text">{{getAgeDifference(user.dateOfBirth)}}</p>
                             </td>
                             <td>
                                 <p class="action red" (click)="removeMember(user.id);">Delete</p>
+                            </td>
+                        </tr>
+                        <tr *ngIf="squadMembers.length == 0">
+                            <td colspan="5">
+                                <nz-empty></nz-empty> `
                             </td>
                         </tr>
                     </tbody>
@@ -110,6 +115,12 @@
             </div>
         </div>
     </div>
+
+    <ng-container *ngIf="squads.length == 0">
+        <div class="full-width d-flex align-items-center justify-content-center" style="padding: 100px 0;">
+            <nz-empty></nz-empty> `
+        </div>
+    </ng-container>
 </div>
 
 <app-squad-modal [(visible)]="showSquadModal" [action]="squadAction" [coaches]="coaches" [squad]="selectedSquad"

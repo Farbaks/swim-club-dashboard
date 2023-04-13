@@ -20,7 +20,7 @@ export class GalaGroupMember {
     raceGroupId!: number
 }
 
-export class GalaMemberPerfoomance {
+export class GalaMemberPerformance {
     time: string = ''
     points!: number;
     strokeId!: number;

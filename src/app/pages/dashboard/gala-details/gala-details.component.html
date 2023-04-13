@@ -108,6 +108,11 @@
                                 <p class="action red" (click)="removeMember(user.id);">Delete</p>
                             </td>
                         </tr>
+                        <tr *ngIf="selectedGroup?.race_members.length == 0">
+                            <td colspan="5">
+                                <nz-empty></nz-empty> `
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

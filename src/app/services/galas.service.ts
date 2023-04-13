@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Gala, GalaGroup, GalaGroupMember } from '../models/gala';
+import { Gala, GalaGroup, GalaGroupMember, GalaMemberPerformance } from '../models/gala';
 import { ApiService } from './api.service';
 
 @Injectable({
@@ -53,6 +53,10 @@ export class GalasService {
     // 
     createGalaGroupMembers(data: GalaGroupMember) {
         return this.apiService.post('gala-members', data);
+    }
+
+    updateGalaGroupMember(data: GalaMemberPerformance, id:string) {
+        return this.apiService.put(`gala-members/${id}`, data);
     }
 
     deleteGalaGroupMember(id: string) {

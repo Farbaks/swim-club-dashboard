@@ -47,7 +47,7 @@
         </div>
     </div>
 
-    <div class="table-wrapper" *ngIf="trainingPerformances.length > 0">
+    <div class="table-wrapper">
         <table class="data-table">
             <thead>
                 <tr>
@@ -104,6 +104,11 @@
                             </p>
                         </div>
 
+                    </td>
+                </tr>
+                <tr *ngIf="trainingPerformances.length == 0">
+                    <td colspan="9">
+                        <nz-empty></nz-empty> `
                     </td>
                 </tr>
             </tbody>

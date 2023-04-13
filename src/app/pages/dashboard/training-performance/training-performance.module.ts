@@ -9,6 +9,7 @@ import { AvatarModule } from 'ngx-avatars';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { TrainingsModalModule } from 'src/app/components/modals/trainings-modal/trainings-modal.module';
 import { TrainingPerformanceModalModule } from 'src/app/components/modals/training-performance-modal/training-performance-modal.module';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { TrainingPerformanceModalModule } from 'src/app/components/modals/traini
         NzIconModule,
         AvatarModule,
         NgxPaginationModule,
+        NzEmptyModule,
         TrainingPerformanceModalModule
     ]
 })

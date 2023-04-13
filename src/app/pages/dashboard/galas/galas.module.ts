@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { GalaModalModule } from 'src/app/components/modals/gala-modal/gala-modal.module';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { GalaModalModule } from 'src/app/components/modals/gala-modal/gala-modal
         FormsModule,
         NzIconModule,
         NgxPaginationModule,
+        NzEmptyModule,
         GalaModalModule
     ]
 })

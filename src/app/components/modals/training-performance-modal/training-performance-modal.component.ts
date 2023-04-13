@@ -105,8 +105,8 @@ export class TrainingPerformanceModalComponent {
                 },
                 error: (e: any) => {
                     this.processLoading = false;
-                    console.log(e)
-                    this.generalService.showErrorMessage(e.errors.message)
+                    this.errorMessage = e;
+                    this.generalService.showErrorMessage(e)
                 }
             })
             return;

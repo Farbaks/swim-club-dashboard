@@ -5,6 +5,7 @@ import { WardModalModule } from '../../modals/ward-modal/ward-modal.module';
 import { FormsModule } from '@angular/forms';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { AvatarModule } from 'ngx-avatars';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
 
 
 
@@ -17,7 +18,8 @@ import { AvatarModule } from 'ngx-avatars';
         FormsModule,
         NzIconModule,
         AvatarModule,
-        WardModalModule
+        NzEmptyModule,
+        WardModalModule,
     ],
     exports: [
         WardsComponent

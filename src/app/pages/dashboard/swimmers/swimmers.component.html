@@ -1,1 +1,91 @@
-<p>swimmers works!</p>
+<div class="side-page">
+    <div class="top d-flex align-items-center justify-content-between">
+        <div class="left">
+            <h1 class="text-black-1">Swimmers</h1>
+            <p class="text-black-5">View all swimmers and their performance over time.</p>
+        </div>
+    </div>
+
+    <div class="filter-box d-flex justify-content-start">
+        <div class="input-box search-box">
+            <label>Search for trainings</label>
+            <div class="input-container">
+                <span class="before" nz-icon nzType="search" nzTheme="outline"></span>
+                <input type="search" placeholder="Search for name," [(ngModel)]="query"
+                    (ngModelChange)="getSwimmers()" />
+            </div>
+        </div>
+        <div class="input-box">
+            <label>Squads</label>
+            <div class="select-container full-width">
+                <select class="full-width" [(ngModel)]="selectedSquad" (ngModelChange)="getSwimmers()">
+                    <option ngValue="">All squads</option>
+                    <option [ngValue]="squad.name" *ngFor="let squad of squads">{{squad.name}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-wrapper">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>NAME</th>
+                    <th>SQUAD</th>
+                    <th>AGE</th>
+                    <th>GENDER</th>
+                    <th>1st place </th>
+                    <th>2nd place </th>
+                    <th>3rd place </th>
+                    <th>Best result</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr
+                    *ngFor="let user of swimmers | paginate: { itemsPerPage: limit, currentPage: page, totalItems: totalCount }">
+                    <td>
+                        <div class="initials">
+                            <ngx-avatars size="50" [name]="user.firstName+' '+user.lastName"></ngx-avatars>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="details">
+                            <p class="heading">{{user.firstName}} {{user.lastName}}</p>
+                        </div>
+                    </td>
+                    <td>
+                        <p class="text">{{user.squad}}</p>
+                    </td>
+                    <td>
+                        <p class="text">{{getAgeDifference(user.dateOfBirth)}}</p>
+                    </td>
+                    <td>
+                        <p class="text">{{user.gender | titlecase}}</p>
+                    </td>
+                    <td>
+                        <p class="text">{{user.firstPlaceCount}}</p>
+                    </td>
+                    <td>
+                        <p class="text">{{user.secondPlaceCount}}</p>
+                    </td>
+                    <td>
+                        <p class="text">{{user.thirdPlaceCount}}</p>
+                    </td>
+                    <td>
+                        <p class="text">{{user.bestResultGroup}}</p>
+                    </td>
+                </tr>
+                <tr *ngIf="swimmers.length == 0">
+                    <td colspan="10">
+                        <nz-empty></nz-empty> `
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="pagination d-flex justify-content-center" *ngIf="swimmers.length > 0">
+            <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+        </div>
+    </div>
+</div>

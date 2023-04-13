@@ -52,6 +52,11 @@
                         <p class="action" (click)="toggleWardModal('edit', relationship);">Edit</p>
                     </td>
                 </tr>
+                <tr *ngIf="wards.length == 0">
+                    <td colspan="7">
+                        <nz-empty></nz-empty> `
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
