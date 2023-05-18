@@ -4,7 +4,7 @@
             <h1 class="text-black-1">Training Performances</h1>
             <p class="text-black-5">View all squad trainings performances.</p>
         </div>
-        <div class="right">
+        <div class="right" [allowedRoles]="['admin', 'coach']">
             <button class="button-primary" (click)="toggleTrainingPerformanceModal('new');">+ Add Performance data</button>
         </div>
     </div>
@@ -94,7 +94,7 @@
                     <td>
                         <p class="text">{{performance.trainingDate | date:'short'}}</p>
                     </td>
-                    <td>
+                    <td [allowedRoles]="['admin', 'coach']">
                         <div class="d-flex align-items-center">
                             <p class="action" (click)="toggleTrainingPerformanceModal('edit', performance);">
                                 Edit

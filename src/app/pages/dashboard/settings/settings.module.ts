@@ -8,6 +8,7 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { ProfileModule } from 'src/app/components/common/profile/profile.module';
 import { ChangePasswordModule } from 'src/app/components/common/change-password/change-password.module';
 import { WardsModule } from 'src/app/components/common/wards/wards.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { WardsModule } from 'src/app/components/common/wards/wards.module';
     NzTabsModule,
     ProfileModule,
     ChangePasswordModule,
-    WardsModule
+    WardsModule,
+    SharedModule
   ]
 })
 export class SettingsModule { }

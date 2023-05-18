@@ -1,1 +1,61 @@
-<p>home works!</p>
+<div class="side-page">
+    <div class="top d-flex align-items-center justify-content-between">
+        <div class="left">
+            <h1 class="text-black-1">Dashboard</h1>
+            <p class="text-black-5">Welcome back to your dashboard, Farouk!</p>
+        </div>
+    </div>
+    <ng-container *ngIf="report">
+        <div class="count-list d-flex align-items-center justify-content-between">
+            <div class="count-item">
+                <h2>Total Swimmers</h2>
+                <p>{{report.numberofSwimmers}}</p>
+            </div>
+            <div class="count-item">
+                <h2>Total Coaches</h2>
+                <p>{{report.numOfCoaches}}</p>
+            </div>
+            <div class="count-item">
+                <h2>Total Squads</h2>
+                <p>{{report.numOfSquads}}</p>
+            </div>
+            <div class="count-item">
+                <h2>Total Galas held</h2>
+                <p>{{report.numberofGalas}}</p>
+            </div>
+        </div>
+        <div class="body d-flex justify-content-between">
+            <!-- <div class="gala-events">
+                <div class="title d-flex align-items-center justify-content-between">
+                    <h2>Upcoming Gala Events</h2>
+                    <a class="link">View all</a>
+                </div>
+                <div class="gala-list d-flex flex-wrap align-items-center justify-content-start">
+                    <div class="gala-item" *ngFor="let n of [1,1,1,1]">
+    
+                    </div>
+                </div>
+            </div> -->
+            <div class="swimmers">
+                <h2>Top Swimmers</h2>
+                <div class="swimmer-list d-flex align-items-start justify-content-start">
+                    <div class="swimmer-item d-flex align-items-center flex-column" *ngFor="let swimmer of report.swimmers">
+                        <div class="initials">
+                            <ngx-avatars size="100" [name]="swimmer.firstName+ ' '+swimmer.lastName"></ngx-avatars>
+                        </div>
+                        <div class="texts">
+                            <p class="text-center name">{{swimmer.firstName}} {{swimmer.lastName}}</p>
+                            <p class="text-center">{{swimmer.age}} years</p>
+                            <p class="text-center"><b>{{swimmer.firstPlaceCount}}</b> Gold Medals</p>
+                            <p class="text-center"><b>{{swimmer.secondPlaceCount}}</b> Silver Medals</p>
+                            <p class="text-center"><b>{{swimmer.thirdPlaceCount}}</b> Bronze Medals</p>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    
+    
+</div>

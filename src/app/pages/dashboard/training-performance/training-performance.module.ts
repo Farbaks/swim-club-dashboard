@@ -10,6 +10,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { TrainingsModalModule } from 'src/app/components/modals/trainings-modal/trainings-modal.module';
 import { TrainingPerformanceModalModule } from 'src/app/components/modals/training-performance-modal/training-performance-modal.module';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { NzEmptyModule } from 'ng-zorro-antd/empty';
         AvatarModule,
         NgxPaginationModule,
         NzEmptyModule,
-        TrainingPerformanceModalModule
+        TrainingPerformanceModalModule,
+        SharedModule
     ]
 })
 export class TrainingPerformanceModule { }

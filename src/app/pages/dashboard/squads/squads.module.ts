@@ -7,15 +7,15 @@ import { FormsModule } from '@angular/forms';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { AvatarModule } from 'ngx-avatars';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { UsersModalModule } from 'src/app/components/modals/users-modal/users-modal.module';
 import { SquadModalModule } from 'src/app/components/modals/squad-modal/squad-modal.module';
 import { SquadMemberModalModule } from 'src/app/components/modals/squad-member-modal/squad-member-modal.module';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
     declarations: [
-        SquadsComponent
+        SquadsComponent,
     ],
     imports: [
         CommonModule,
@@ -26,7 +26,8 @@ import { NzEmptyModule } from 'ng-zorro-antd/empty';
         NgxPaginationModule,
         NzEmptyModule,
         SquadModalModule,
-        SquadMemberModalModule
+        SquadMemberModalModule,
+        SharedModule
     ]
 })
 export class SquadsModule { }

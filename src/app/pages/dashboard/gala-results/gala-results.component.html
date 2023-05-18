@@ -80,7 +80,7 @@
                                         <i  *ngIf="!swimmer.rank">Not Added</i>
                                     </p> 
                                 </td>
-                                <td>
+                                <td [allowedRoles]="['admin']">
                                     <p class="action" (click)="toggleResultModal(swimmer)">Edit</p>
                                 </td>
                             </tr>

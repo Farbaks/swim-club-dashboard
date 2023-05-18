@@ -68,11 +68,6 @@
                         (click)="passwordField.type = 'text'"></i>
                 </div>
             </div>
-            <div class="input-box full-width" *ngIf="form.value.role == 'swimmer' && age < 18">
-                <label>Parent Email</label>
-                <input type="email" placeholder="johndoe@example.com" autocomplete="email"
-                    formControlName="parentEmail" />
-            </div>
             <div class="input-box full-width">
                 <label>Address</label>
                 <input type="text" placeholder="Stafforshire Uni" autocomplete="address-line1" formControlName="address"

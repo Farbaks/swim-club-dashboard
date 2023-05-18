@@ -4,7 +4,7 @@
             <h1 class="text-black-1">Trainings</h1>
             <p class="text-black-5">View all squad trainings.</p>
         </div>
-        <div class="right">
+        <div class="right" [allowedRoles]="['admin', 'coach']">
             <button class="button-primary" (click)="toggleTrainingModal('new');">+ Add Training</button>
         </div>
     </div>
@@ -67,7 +67,7 @@
                     <td>
                         <p class="text">{{training.squad.name}}</p>
                     </td>
-                    <td>
+                    <td [allowedRoles]="['admin', 'coach']">
                         <div class="d-flex align-items-center">
                             <p class="action" (click)="toggleTrainingModal('edit', training);">
                                 Edit

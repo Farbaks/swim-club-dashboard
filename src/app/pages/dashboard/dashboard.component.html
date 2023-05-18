@@ -6,7 +6,8 @@
             <span nz-icon nzType="appstore" nzTheme="outline"></span>
             Dashboard
         </a>
-        <a routerLink="/dashboard/users" routerLinkActive="active-link" #userLink="routerLinkActive">
+        <a routerLink="/dashboard/users" routerLinkActive="active-link" #userLink="routerLinkActive"
+            [allowedRoles]="['admin']">
             <span nz-icon nzType="user" nzTheme="outline"></span>
             Users
         </a>

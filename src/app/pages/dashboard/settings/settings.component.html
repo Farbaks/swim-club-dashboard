@@ -13,7 +13,7 @@
         <nz-tab nzTitle="Change Password">
             <app-change-password></app-change-password>
         </nz-tab>
-        <nz-tab nzTitle="Wards">
+        <nz-tab nzTitle="Wards" *ngIf="user.role == 'parent'">
             <app-wards></app-wards>
         </nz-tab>
     </nz-tabset>

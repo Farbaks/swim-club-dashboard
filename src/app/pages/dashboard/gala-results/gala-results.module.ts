@@ -8,6 +8,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { GalaResultModalModule } from 'src/app/components/modals/gala-result-modal/gala-result-modal.module';
 import { AvatarModule } from 'ngx-avatars';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { NzEmptyModule } from 'ng-zorro-antd/empty';
         NzIconModule,
         AvatarModule,
         NzEmptyModule,
-        GalaResultModalModule
+        GalaResultModalModule,
+        SharedModule
     ]
 })
 export class GalaResultsModule { }

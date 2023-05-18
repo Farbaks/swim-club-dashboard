@@ -4,7 +4,7 @@
             <h1 class="text-black-1">Galas</h1>
             <p class="text-black-5">View all gala events.</p>
         </div>
-        <div class="right">
+        <div class="right" [allowedRoles]="['admin']">
             <button class="button-primary" (click)="toggleGalaModal('new');">+ Add Gala</button>
         </div>
     </div>
@@ -55,10 +55,10 @@
                             <p class="action" [routerLink]="gala.id">
                                 View
                             </p>
-                            <p class="action" style="margin-left: 20px;" (click)="toggleGalaModal('edit', gala);">
+                            <p class="action" [allowedRoles]="['admin']" style="margin-left: 20px;" (click)="toggleGalaModal('edit', gala);">
                                 Edit
                             </p>
-                            <p class="action red" style="margin-left: 20px;" (click)="deleteGala(gala.id);">
+                            <p class="action red" [allowedRoles]="['admin']" style="margin-left: 20px;" (click)="deleteGala(gala.id);">
                                 Delete
                             </p>
                         </div>

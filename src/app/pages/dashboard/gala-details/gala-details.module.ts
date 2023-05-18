@@ -10,6 +10,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { AvatarModule } from 'ngx-avatars';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
     declarations: [
@@ -24,7 +25,8 @@ import { NzEmptyModule } from 'ng-zorro-antd/empty';
         NzBreadCrumbModule,
         NzEmptyModule,
         GalaGroupModalModule,
-        GalaGroupMemberModalModule
+        GalaGroupMemberModalModule,
+        SharedModule
     ]
 })
 export class GalaDetailsModule { }

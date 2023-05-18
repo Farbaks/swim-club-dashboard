@@ -8,6 +8,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { GalaModalModule } from 'src/app/components/modals/gala-modal/gala-modal.module';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { NzEmptyModule } from 'ng-zorro-antd/empty';
         NzIconModule,
         NgxPaginationModule,
         NzEmptyModule,
-        GalaModalModule
+        GalaModalModule,
+        SharedModule
     ]
 })
 export class GalasModule { }

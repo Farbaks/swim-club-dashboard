@@ -4,7 +4,7 @@
             <h1 class="text-black-1">Squads</h1>
             <p class="text-black-5">View all squads and their members.</p>
         </div>
-        <div class="right">
+        <div class="right" [allowedRoles]="['admin', 'coach']">
             <button class="button-primary" (click)="toggleSquadModal('new');">+ Add Squad</button>
         </div>
     </div>
@@ -39,7 +39,7 @@
 
         <!-- Card Details -->
         <div class="card-details" *ngIf="selectedSquad" [class.open-details]="showSquadDetails">
-            <div class="right">
+            <div class="right" [allowedRoles]="['admin', 'coach']">
                 <button class="button-primary-2" (click)="toggleSquadModal('edit')">
                     <span nz-icon nzType="edit" nzTheme="outline"></span>
                     Edit Squad Details
@@ -64,7 +64,7 @@
                     <input type="search" placeholder="Search" [(ngModel)]="squadMembersQuery"
                         (ngModelChange)="getSquadMembers()" />
                 </div>
-                <button class="button-primary-2" (click)="showSquadMemberModal = true;">+ Add Member</button>
+                <button class="button-primary-2" (click)="showSquadMemberModal = true;" [allowedRoles]="['admin', 'coach']">+ Add Member</button>
             </div>
 
             <div class="table-wrapper">
@@ -99,7 +99,7 @@
                                 <p class="text">{{getAgeDifference(user.dateOfBirth)}}</p>
                             </td>
                             <td>
-                                <p class="action red" (click)="removeMember(user.id);">Delete</p>
+                                <p class="action red" (click)="removeMember(user.id);" [allowedRoles]="['admin', 'coach']">Delete</p>
                             </td>
                         </tr>
                         <tr *ngIf="squadMembers.length == 0">

@@ -18,7 +18,7 @@
                 {{gala?.requirements}}
             </p>
         </div>
-        <div class="right">
+        <div class="right" [allowedRoles]="['admin']">
             <button class="button-primary" (click)="toggleGroupModal('new');">+ Add Group</button>
         </div>
     </div>
@@ -50,7 +50,7 @@
 
         <!-- Card Details -->
         <div class="card-details" *ngIf="selectedGroup" [class.open-details]="showGroupDetails">
-            <div class="right">
+            <div class="right" [allowedRoles]="['admin']">
                 <button class="button-primary-2" (click)="toggleGroupModal('edit')">
                     <span nz-icon nzType="edit" nzTheme="outline"></span>
                     Edit Group Details
@@ -71,7 +71,7 @@
                     <input type="search" placeholder="Search" [(ngModel)]="groupMembersQuery"
                         (ngModelChange)="getGroupMembers()" />
                 </div>
-                <button class="button-primary-2" (click)="showGroupMemberModal = true;">+ Add Member</button>
+                <button class="button-primary-2" (click)="showGroupMemberModal = true;" [allowedRoles]="['admin']">+ Add Member</button>
             </div>
 
             <div class="table-wrapper">
@@ -104,7 +104,7 @@
                             <td>
                                 <p class="text">{{user.club || 'N/A'}}</p>
                             </td>
-                            <td>
+                            <td [allowedRoles]="['admin']">
                                 <p class="action red" (click)="removeMember(user.id);">Delete</p>
                             </td>
                         </tr>

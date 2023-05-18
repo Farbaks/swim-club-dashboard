@@ -1,0 +1,81 @@
+.count-list {
+    width: 100%;
+    gap: 2%;
+    .count-item {
+        width: 22%;
+        background: var(--grey-1);
+        border-radius: 10px;
+        padding: 20px;
+        h2 {
+            font-size: 16px;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 32px;
+            font-weight: 600;
+        }
+    }
+}
+.body {
+    width: 100%;
+    gap: 2%;
+    margin-top: 32px;
+    h2 {
+        font-size: 16px;
+        font-weight: 500;
+        margin-bottom: 10px;
+    }
+    .gala-events {
+        width: 60%;
+        
+        .link {
+            color: var(--blue-1);
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+        .gala-list {
+            width: 100%;
+            gap: 32px 4%;
+            margin-top: 16px;
+            .gala-item {
+                width: 48%;
+                height: 150px;
+                border-radius: 10px;
+                content: '';
+                background: var(--grey-1);
+                // box-shadow: 18.3px 17.5px 17.2px rgba(0, 0, 0, 0.013), 146px 140px 137px rgba(0, 0, 0, 0.03);
+            }
+        }
+    }
+    .swimmers {
+        width: 100%;
+        margin-top: 30px;
+        .swimmer-list {
+            width: 100%;
+            margin-top: 100px;
+            gap: 0 2%;
+            .swimmer-item {
+                width: 30%;
+                border-radius: 10px;
+                content: '';
+                background: var(--grey-1);
+                margin-bottom: 62px;
+                position: relative;
+                // box-shadow: 18.3px 17.5px 17.2px rgba(0, 0, 0, 0.013), 146px 140px 137px rgba(0, 0, 0, 0.03);
+                .initials {
+                    position: absolute;
+                    top: -45px;
+                }
+                .texts {
+                    padding: 80px 0px;
+                    .name {
+                        font-size: 24px;
+                        font-weight: 500;
+                    }
+                }
+            }
+        }
+    }
+}

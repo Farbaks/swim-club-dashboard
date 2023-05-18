@@ -52,5 +52,9 @@ export class UserService {
         return this.apiService.put(`users/relationships/${id}/info`, data);
     }
 
+    getReport() {
+        return this.apiService.get('report');
+    }
+
     
 }
